@@ -1,0 +1,75 @@
+<div class="container">
+    <p class="text">My Phone book!</p>
+    <hr>
+    <div class="search">
+        <input class="inputSearch" type="text" [(ngModel)]="searchField" placeholder="search text goes here">
+        <input class="inputBtn" type="button" value="add phone" (click)="addPhone()">
+    </div>
+    <div class="table">
+        <table id="tablleList">
+            <thead>
+                <th (click)="sortShowFirst()">First Name{{symbolsFirst}}</th>
+                <th (click)="sortShowLast()">Last Name{{symbolsLast}}</th>
+                <th (click)="sortShowNumber()">Number{{symbolsNumber}}</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </thead>
+            <tbody>
+                <tr class="trHover" *ngFor="let user of userList | search: searchField | sort:type:element; index as i;">
+                    <td>{{ user.firstName | titlecase }}</td>
+                    <td>{{ user.lastName | titlecase }}</td>
+                    <td>{{ user.numberPhone }}</td>
+                    <td><input class="btnEdit" type="button" (click)="editUser(i)" value="Edit"></td>
+                    <td><input class="btnDel" type="button" (click)="deleteUser(i)" value="Delete"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<ng-container>
+    <div class="modal-wrapper" *ngIf="isOpenModalOne">
+        <div class="wrapper-container">
+            <div class="addPhone">
+                <div>Add Phone</div>
+                <div class="closeModal" (click)="closeModalOne()">X</div>
+            </div>
+            <hr>
+            <div>
+                <input class="inputField" type="text" [(ngModel)]="firstName" placeholder="first name goes here">
+            </div>
+            <div>
+                <input class="inputField" type="text" [(ngModel)]="secondName" placeholder="second name goes here">
+            </div>
+            <div>
+                <input class="inputField" type="text" [(ngModel)]="phoneNumber" placeholder="number phone goes here">
+            </div>
+            <div>
+                <input class="btnSave" type="button" value="Save" (click)="saveValue()">
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container>
+    <div class="modal-wrapper" *ngIf="isOpenModalTwo">
+        <div class="wrapper-container">
+            <div class="addPhone">
+                <div>Add Phone</div>
+                <div class="closeModal" (click)="closeModalTwo()">X</div>
+            </div>
+            <hr>
+            <div>
+                <input class="inputField" type="text" [(ngModel)]="firstValue">
+            </div>
+            <div>
+                <input class="inputField" type="text" [(ngModel)]="secondValue">
+            </div>
+            <div>
+                <input class="inputField" type="text" [(ngModel)]="phoneValue">
+            </div>
+            <div>
+                <input class="btnSave" type="button" value="Save" (click)="editSaveValue()">
+            </div>
+        </div>
+    </div>
+</ng-container>
